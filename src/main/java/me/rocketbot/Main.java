@@ -1,12 +1,11 @@
 package me.rocketbot;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import me.rocketbot.buttons.AddButton;
-import me.rocketbot.buttons.ChoosePlaylistsButton;
-import me.rocketbot.buttons.LoopButton;
-import me.rocketbot.buttons.RemoveButton;
-import me.rocketbot.commands.Shutdown;
+import me.rocketbot.buttons.*;
 import me.rocketbot.commands.*;
+import me.rocketbot.listeners.ButtonListener;
+import me.rocketbot.listeners.CommandManager;
+import me.rocketbot.listeners.SelectMenuListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -31,28 +30,27 @@ public class Main {
         CommandManager manager = new CommandManager();
         manager.add(new Play());
         manager.add(new Shutdown());
-        manager.add(new NowPlaying());
         manager.add(new Loop());
         manager.add(new Queue());
         manager.add(new Skip());
         manager.add(new Clear());
         manager.add(new Radio());
-        manager.add(new RadioPivo());
-        manager.add(new RadioPhonk());
-        manager.add(new RadioRap());
-        manager.add(new RadioChill());
-        manager.add(new RadioWave());
-        //manager.add(new List()); //TODO watch in class List
+        manager.add(new Playlists());
 
         ButtonListener buttonListener = new ButtonListener();
-        buttonListener.add(new ChoosePlaylistsButton());//DO NOT CHANGE THIS POSITION RELATED TO BUTTONLISTENER(SHOULD ALWAYS ADD FIRST)
-        buttonListener.add(new AddButton());
         buttonListener.add(new LoopButton());
-        buttonListener.add(new RemoveButton());
+        buttonListener.add(new PauseButton());
+        buttonListener.add(new ResumeButton());
+        buttonListener.add(new SkipButton());
+        buttonListener.add(new AppendSong());
+
+        SelectMenuListener playlistsListener = new SelectMenuListener();
 
         jda.addEventListener(manager);
 
         jda.addEventListener(buttonListener);
+
+        jda.addEventListener(playlistsListener);
     }
 
     public static void main(String[] args) {

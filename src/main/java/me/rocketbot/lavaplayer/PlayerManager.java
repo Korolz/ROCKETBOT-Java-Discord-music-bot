@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class PlayerManager {
 
+    private static final String musicChannelLabel = "music";
     private static PlayerManager INSTANCE;
     private Map<Long, GuildMusicManager> guildMusicManagers = new HashMap<>();
     private AudioPlayerManager audioPlayerManager = new DefaultAudioPlayerManager();
@@ -58,12 +59,15 @@ public class PlayerManager {
 
             @Override
             public void noMatches() {
-
+                guild.getTextChannelsByName(musicChannelLabel,true).get(0).sendMessage("There is no matches to a track "+ trackURL).queue();
             }
 
             @Override
             public void loadFailed(FriendlyException exception) {
-
+                if(exception.severity.equals(FriendlyException.Severity.COMMON))
+                    guild.getTextChannelsByName(musicChannelLabel,true).get(0).sendMessage(trackURL + " is probably banned in Russia...").queue();
+                else
+                    guild.getTextChannelsByName(musicChannelLabel,true).get(0).sendMessage(trackURL + " failed to load properly").queue();
             }
         });
     }

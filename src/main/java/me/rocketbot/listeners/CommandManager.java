@@ -1,5 +1,6 @@
-package me.rocketbot;
+package me.rocketbot.listeners;
 
+import me.rocketbot.interfaces.RocketBotCommand;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;

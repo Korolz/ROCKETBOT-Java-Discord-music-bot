@@ -2,7 +2,7 @@ package me.rocketbot.commands;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
-import me.rocketbot.RocketBotCommand;
+import me.rocketbot.interfaces.RocketBotCommand;
 import me.rocketbot.lavaplayer.GuildMusicManager;
 import me.rocketbot.lavaplayer.PlayerManager;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -56,7 +56,7 @@ public class Queue implements RocketBotCommand {
         GuildMusicManager guildMusicManager = PlayerManager.get().getGuildMusicManager(event.getGuild());
         List<AudioTrack> queue = new ArrayList<>(guildMusicManager.getTrackScheduler().getQueue());
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setColor(6113681);
+        embedBuilder.setColor(5785393);
         embedBuilder.setTitle("**Current Queue**");
         if(queue.isEmpty()) {
             embedBuilder.setDescription("Queue is empty");

@@ -1,6 +1,6 @@
 package me.rocketbot.commands;
 
-import me.rocketbot.RocketBotCommand;
+import me.rocketbot.interfaces.RocketBotCommand;
 import me.rocketbot.lavaplayer.GuildMusicManager;
 import me.rocketbot.lavaplayer.PlayerManager;
 import me.rocketbot.lavaplayer.TrackScheduler;
@@ -54,7 +54,8 @@ public class Shutdown implements RocketBotCommand {
         TrackScheduler trackScheduler = guildMusicManager.getTrackScheduler();
         trackScheduler.getQueue().clear();
         //trackScheduler.getPlayer().stopTrack();
-        trackScheduler.setLoop(false);
+        if(trackScheduler.isLoop())
+            trackScheduler.toggleLoop();
         trackScheduler.getPlayer().destroy();
         event.reply("**Bye!**").setEphemeral(true).queue();
         event.getGuild().getAudioManager().closeAudioConnection();

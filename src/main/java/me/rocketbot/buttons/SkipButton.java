@@ -1,33 +1,20 @@
-package me.rocketbot.commands;
+package me.rocketbot.buttons;
 
-import me.rocketbot.interfaces.RocketBotCommand;
+import me.rocketbot.interfaces.RocketBotButton;
 import me.rocketbot.lavaplayer.GuildMusicManager;
 import me.rocketbot.lavaplayer.PlayerManager;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 
-import java.util.List;
-
-public class Clear implements RocketBotCommand {
+public class SkipButton implements RocketBotButton {
     @Override
-    public String getName() {
-        return "clear";
+    public String getId() {
+        return "SKIP_BUTTON";
     }
 
     @Override
-    public String getDescription() {
-        return "Clears the whole queue";
-    }
-
-    @Override
-    public List<OptionData> getOptions() {
-        return null;
-    }
-
-    @Override
-    public void execute(SlashCommandInteractionEvent event) {
+    public void execute(ButtonInteractionEvent event) {
         Member member = event.getMember();
         GuildVoiceState memberVoiceState = member.getVoiceState();
 
@@ -50,7 +37,7 @@ public class Clear implements RocketBotCommand {
         }
 
         GuildMusicManager guildMusicManager = PlayerManager.get().getGuildMusicManager(event.getGuild());
-        guildMusicManager.getTrackScheduler().removeQueue();
-        event.reply("**Queue removed**").setEphemeral(true).queue();
+        guildMusicManager.getTrackScheduler().getPlayer().stopTrack();
+        event.reply("**Skipped**").setEphemeral(true).queue();
     }
 }

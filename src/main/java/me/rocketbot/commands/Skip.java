@@ -1,6 +1,6 @@
 package me.rocketbot.commands;
 
-import me.rocketbot.RocketBotCommand;
+import me.rocketbot.interfaces.RocketBotCommand;
 import me.rocketbot.lavaplayer.GuildMusicManager;
 import me.rocketbot.lavaplayer.PlayerManager;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
