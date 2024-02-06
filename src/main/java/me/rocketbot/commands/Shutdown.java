@@ -53,7 +53,6 @@ public class Shutdown implements RocketBotCommand {
         GuildMusicManager guildMusicManager = PlayerManager.get().getGuildMusicManager(event.getGuild());
         TrackScheduler trackScheduler = guildMusicManager.getTrackScheduler();
         trackScheduler.getQueue().clear();
-        //trackScheduler.getPlayer().stopTrack();
         if(trackScheduler.isLoop())
             trackScheduler.toggleLoop();
         trackScheduler.getPlayer().destroy();

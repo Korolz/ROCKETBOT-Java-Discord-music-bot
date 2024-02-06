@@ -1,12 +1,15 @@
 package me.rocketbot.commands;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import me.rocketbot.interfaces.RocketBotCommand;
 import me.rocketbot.lavaplayer.GuildMusicManager;
 import me.rocketbot.lavaplayer.PlayerManager;
+import me.rocketbot.structures.NowPlayingMessage;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 
 import java.util.List;
 
@@ -51,6 +54,13 @@ public class Loop implements RocketBotCommand {
 
         GuildMusicManager guildMusicManager = PlayerManager.get().getGuildMusicManager(event.getGuild());
         guildMusicManager.getTrackScheduler().toggleLoop();
+        AudioPlayer player = guildMusicManager.getTrackScheduler().getPlayer();
+
+        NowPlayingMessage message = new NowPlayingMessage(player, player.getPlayingTrack());
+        event.getChannel().editMessageComponentsById(
+                guildMusicManager.getTrackScheduler().getMessageId(),
+                ActionRow.of(message.getActionRowComponents(guildMusicManager.getTrackScheduler().isLoop()))
+        ).queue();
         event.reply("**Repeat** is now " + guildMusicManager.getTrackScheduler().isLoop()).setEphemeral(true).queue();
     }
 }

@@ -1,11 +1,14 @@
 package me.rocketbot.buttons;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import me.rocketbot.interfaces.RocketBotButton;
 import me.rocketbot.lavaplayer.GuildMusicManager;
 import me.rocketbot.lavaplayer.PlayerManager;
+import me.rocketbot.structures.NowPlayingMessage;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 
 public class PauseButton implements RocketBotButton {
     @Override
@@ -26,11 +29,6 @@ public class PauseButton implements RocketBotButton {
         Member self = event.getGuild().getSelfMember();
         GuildVoiceState selfVoiceState = self.getVoiceState();
 
-        if(!selfVoiceState.inAudioChannel()) { //checks presence in a channel
-            event.reply("I am not in an audio channel").setEphemeral(true).queue();
-            return;
-        }
-
         if(selfVoiceState.getChannel() != memberVoiceState.getChannel()) {
             event.reply("You are not in the same channel as me").setEphemeral(true).queue();
             return;
@@ -38,6 +36,15 @@ public class PauseButton implements RocketBotButton {
 
         GuildMusicManager guildMusicManager = PlayerManager.get().getGuildMusicManager(event.getGuild());
         guildMusicManager.getTrackScheduler().getPlayer().setPaused(true);
+
+//        AudioPlayer player = guildMusicManager.getTrackScheduler().getPlayer();
+//
+//        NowPlayingMessage message = new NowPlayingMessage(player, player.getPlayingTrack());
+//        event.getChannel().editMessageComponentsById(
+//                guildMusicManager.getTrackScheduler().getMessageId(),
+//                ActionRow.of(message.getActionRowComponents(guildMusicManager.getTrackScheduler().isLoop()))
+//        ).queue();
+
         event.reply("**Paused**").setEphemeral(true).queue();
     }
 }

@@ -43,6 +43,7 @@ public class Main {
         buttonListener.add(new ResumeButton());
         buttonListener.add(new SkipButton());
         buttonListener.add(new AppendSong());
+        buttonListener.add(new ShutdownButton());
 
         SelectMenuListener playlistsListener = new SelectMenuListener();
 
