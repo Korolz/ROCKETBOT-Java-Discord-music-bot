@@ -1,0 +1,11 @@
+spring.application.name=
+
+bot.token=
+
+bot.youtube.apiToken=
+bot.youtube.channelId=
+
+bot.spotify.secret=
+bot.spotify.id=
+
+bot.yandex.accessToken=
