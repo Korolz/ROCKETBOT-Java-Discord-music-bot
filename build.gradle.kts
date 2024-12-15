@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.korolz"
-version = "1.0.2"
+version = "1.0.3"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -34,9 +34,9 @@ dependencies {
     implementation("net.dv8tion:JDA:5.0.0-beta.20")
 
     implementation("dev.arbjerg:lavaplayer:2.2.2")
-    implementation("dev.lavalink.youtube:v2:1.8.0")
-    implementation("com.github.topi314.lavasrc:lavasrc:4.2.0")
-    implementation("com.github.topi314.lavasrc:lavasrc-protocol:4.2.0")
+    implementation("dev.lavalink.youtube:v2:1.11.1")
+    implementation("com.github.topi314.lavasrc:lavasrc:4.3.0")
+    implementation("com.github.topi314.lavasrc:lavasrc-protocol:4.3.0")
 
     implementation ("com.google.api-client:google-api-client:1.35.2")
     implementation ("com.google.oauth-client:google-oauth-client-jetty:1.35.0")

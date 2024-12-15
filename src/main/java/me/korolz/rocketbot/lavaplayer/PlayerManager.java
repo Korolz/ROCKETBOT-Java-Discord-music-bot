@@ -1,6 +1,7 @@
 package me.korolz.rocketbot.lavaplayer;
 
 import com.github.topi314.lavasrc.spotify.SpotifySourceManager;
+import com.github.topi314.lavasrc.vkmusic.VkMusicSourceManager;
 import com.github.topi314.lavasrc.yandexmusic.YandexMusicSourceManager;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -31,12 +32,13 @@ public class PlayerManager {
     private PlayerManager(
             @Value("${bot.spotify.secret}") String spotifyClientSecret,
             @Value("${bot.spotify.id}") String spotifyClientId,
-            @Value("${bot.yandex.accessToken}") String yandexAccessToken
+            @Value("${bot.yandex.accessToken}") String yandexAccessToken,
+            @Value("${bot.vk.token}") String vkToken
     ) {
-
         audioPlayerManager.registerSourceManager(new SpotifySourceManager(null, spotifyClientId, spotifyClientSecret, null, audioPlayerManager));
         audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager(/*allowSearch:*/ true, new MusicWithThumbnail(), new WebWithThumbnail(), new TvHtml5EmbeddedWithThumbnail(), new WebEmbeddedWithThumbnail()));
         audioPlayerManager.registerSourceManager(new YandexMusicSourceManager(yandexAccessToken));
+        audioPlayerManager.registerSourceManager(new VkMusicSourceManager(vkToken));
         audioPlayerManager.registerSourceManager(new HttpAudioSourceManager());
         audioPlayerManager.registerSourceManager(SoundCloudAudioSourceManager.createDefault());
     }
