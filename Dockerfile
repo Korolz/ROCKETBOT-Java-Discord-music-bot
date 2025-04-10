@@ -1,20 +1,5 @@
-FROM gradle:8.5-jdk21 AS build
-LABEL maintainer="korolz"
-WORKDIR /app
-COPY . /app
-
-ARG YTSOURCE_VERSION
-ARG LAVAPLAYER_VERSION
-ARG LAVASRC_VERSION
-
-ENV YTSOURCE_VERSION=${YTSOURCE_VERSION}
-ENV LAVAPLAYER_VERSION=${LAVAPLAYER_VERSION}
-ENV LAVASRC_VERSION=${LAVASRC_VERSION}
-
-RUN gradle build --no-daemon
-
 FROM openjdk:21
 LABEL maintainer="korolz"
-WORKDIR /app
-COPY --from=build /app/build/libs/ROCKETBOT-1.0.4.jar .
-CMD ["java", "-jar", "ROCKETBOT-1.0.4.jar"]
+WORKDIR /rocketbot
+COPY ./build/libs/ /rocketbot
+CMD ["java", "-jar", "ROCKETBOT-1.0.5.jar"]
