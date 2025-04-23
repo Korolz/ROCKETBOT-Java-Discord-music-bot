@@ -35,8 +35,8 @@ dependencies {
 
     implementation("dev.arbjerg:lavaplayer:2.2.3")
     implementation("dev.lavalink.youtube:v2:1.12.0")
-    implementation("com.github.topi314.lavasrc:lavasrc:4.4.2")
-    implementation("com.github.topi314.lavasrc:lavasrc-protocol:4.4.2")
+    implementation("com.github.topi314.lavasrc:lavasrc:4.6.0")
+    implementation("com.github.topi314.lavasrc:lavasrc-protocol:4.6.0")
 
     implementation ("com.google.api-client:google-api-client:1.35.2")
     implementation ("com.google.oauth-client:google-oauth-client-jetty:1.35.0")
